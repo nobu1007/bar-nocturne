@@ -1,0 +1,10 @@
+{
+  "name": "ノクターン サワー",
+  "name_en": "Nocturne Sour",
+  "category": "cocktail",
+  "price": 1600,
+  "description": "ジャパニーズウイスキーをベースに、ゆずと蜂蜜で爽やかに仕上げたシグネチャーカクテル。フォームの繊細な泡が印象的。",
+  "image": "https://images.unsplash.com/photo-1560512823-829485b8bf24?w=800&q=80",
+  "featured": true,
+  "order": 2
+}

@@ -1,0 +1,10 @@
+{
+  "name": "本日のチーズセレクション",
+  "name_en": "Cheese Selection of the Day",
+  "category": "cheese",
+  "price": 1800,
+  "description": "フランス・イタリアより厳選した3〜4種のチーズ。蜂蜜・ナッツ・クラッカーと共に。お酒との相性抜群のプレートです。",
+  "image": "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=800&q=80",
+  "featured": false,
+  "order": 20
+}

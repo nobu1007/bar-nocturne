@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar Nocturne | 渋谷道玄坂 大人のダイニングバー</title>
+  <meta name="description" content="渋谷道玄坂の隠れ家ダイニングバー Bar Nocturne。こだわりのオリジナルカクテルと創作料理で、大人の夜をお迎えします。営業時間：月〜土 18:00〜翌2:00">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BarOrPub",
+    "name": "Bar Nocturne",
+    "description": "渋谷道玄坂の隠れ家ダイニングバー",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "道玄坂2-10-12 ノクターンビルB1F",
+      "addressLocality": "渋谷区",
+      "addressRegion": "東京都",
+      "addressCountry": "JP"
+    },
+    "telephone": "03-1234-5678",
+    "openingHours": ["Mo-Sa 18:00-02:00", "Su 17:00-24:00"]
+  }
+  </script>
+</head>
+<body>
+
+<!-- 年齢確認モーダル -->
+<div id="age-gate" class="age-gate hidden">
+  <div class="age-gate__box">
+    <p class="age-gate__logo">Bar Nocturne</p>
+    <p class="age-gate__sub">Dining Bar — Shibuya, Tokyo</p>
+    <p class="age-gate__text">
+      当サイトはお酒を提供する店舗のウェブサイトです。<br>
+      20歳以上の方のみご覧いただけます。
+    </p>
+    <div class="age-gate__btns">
+      <button id="age-yes" class="btn-primary">20歳以上です</button>
+      <button id="age-no" class="age-gate__no">20歳未満です</button>
+    </div>
+  </div>
+</div>
+
+<!-- ヘッダー -->
+<header>
+  <a href="index.html" class="header__logo">Bar <span>Nocturne</span></a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="access.html">Access</a></li>
+      <li><a href="tel:03-1234-5678" class="btn-primary">Reservation</a></li>
+    </ul>
+  </nav>
+  <button class="burger" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero__bg">
+    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1600&q=85" alt="Bar Nocturne 店内">
+    <div class="hero__overlay"></div>
+  </div>
+  <div class="hero__content fade-in">
+    <p class="hero__eyebrow">Dining Bar — Shibuya, Tokyo — Since 2026</p>
+    <h1 class="hero__title">
+      <span data-cms="hero-tagline">夜の静寂に宿る、<br>大人の食と酒。</span>
+      <span class="hero__title-en" data-cms="hero-name-en">Bar Nocturne</span>
+    </h1>
+    <p class="hero__tagline" data-cms="hero-tagline-en">Where the Night Speaks in Flavor.</p>
+    <div class="hero__btns">
+      <a href="menu.html" class="btn-primary">Menu</a>
+      <a href="tel:03-1234-5678" class="btn-secondary">Reservation</a>
+    </div>
+  </div>
+  <p class="hero__scroll">Scroll</p>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="concept__inner">
+    <div class="concept__text fade-in">
+      <div class="section-title">
+        <p class="section-en">Concept</p>
+        <p class="section-jp">コンセプト</p>
+      </div>
+      <div class="divider"></div>
+      <p>
+        喧騒を離れた路地の奥、ひっそりと灯りを灯すBar Nocturne。
+        こだわりのカクテルと、素材の旨みを凝縮した料理で、あなたの夜を彩ります。
+      </p>
+      <p>
+        バーテンダーとの会話、グラスに揺れる琥珀色のひとときを、どうぞゆっくりとお楽しみください。
+        お一人様から、大切な方との特別な夜まで、静かな時間をご提供します。
+      </p>
+      <a href="about.html" class="btn-primary" style="margin-top:2rem;">About Us</a>
+    </div>
+    <div class="concept__image fade-in">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&q=80" alt="Bar Nocturne 内観">
+    </div>
+  </div>
+</section>
+
+<!-- MENU PICKUP -->
+<section id="menu-pickup">
+  <div class="container">
+    <div class="section-title section-title--center fade-in">
+      <p class="section-en">Signature</p>
+      <p class="section-jp">おすすめメニュー</p>
+    </div>
+    <div class="divider divider--center"></div>
+    <!-- CMS から動的ロード -->
+    <div class="menu-pickup__grid" id="menu-pickup-grid">
+      <!-- フォールバック（CMS未ロード時） -->
+      <div class="menu-card fade-in">
+        <div class="menu-card__image">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80" alt="Midnight Negroni">
+        </div>
+        <div class="menu-card__body">
+          <p class="menu-card__category">Original Cocktail</p>
+          <h3 class="menu-card__name">Midnight Negroni</h3>
+          <p class="menu-card__name-jp">ミッドナイト ネグローニ</p>
+          <p class="menu-card__desc">深夜の静寂をイメージしたオリジナルネグローニ。スモーキーなジンにビターオレンジの余韻が続く。</p>
+          <p class="menu-card__price">¥1,800</p>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <div class="menu-card__image">
+          <img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?w=800&q=80" alt="Nocturne Sour">
+        </div>
+        <div class="menu-card__body">
+          <p class="menu-card__category">Original Cocktail</p>
+          <h3 class="menu-card__name">Nocturne Sour</h3>
+          <p class="menu-card__name-jp">ノクターン サワー</p>
+          <p class="menu-card__desc">ジャパニーズウイスキーをベースに、ゆずと蜂蜜で爽やかに仕上げたシグネチャーカクテル。</p>
+          <p class="menu-card__price">¥1,600</p>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <div class="menu-card__image">
+          <img src="https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800&q=80" alt="Amber Old Fashioned">
+        </div>
+        <div class="menu-card__body">
+          <p class="menu-card__category">Original Cocktail</p>
+          <h3 class="menu-card__name">Amber Old Fashioned</h3>
+          <p class="menu-card__name-jp">アンバー オールドファッション</p>
+          <p class="menu-card__desc">バーボンとアメリカンオークのスモークで仕上げる至高の一杯。</p>
+          <p class="menu-card__price">¥2,000</p>
+        </div>
+      </div>
+    </div>
+    <div class="menu-pickup__more fade-in">
+      <a href="menu.html" class="btn-primary">View Full Menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT (BARTENDER) -->
+<section id="about">
+  <div class="about__inner">
+    <div class="about__image fade-in">
+      <img src="https://images.unsplash.com/photo-1508247967583-7d982ea01526?w=1200&q=80" alt="バーテンダー 黒川 誠">
+    </div>
+    <div class="about__text fade-in">
+      <p class="about__role">Head Bartender</p>
+      <h2 class="about__name">
+        黒川 誠<br>
+        <span style="font-size:0.55em;letter-spacing:0.1em;font-style:italic;color:var(--color-text-sub);">Makoto Kurokawa</span>
+      </h2>
+      <div class="divider"></div>
+      <div class="about__body">
+        <p>
+          東京・大阪の名店で20年以上の修業を積み、ロンドンとニューヨークでも腕を磨いた後、念願の独立店をオープン。
+          カクテルは「飲む芸術品」であるという信念のもと、素材の選定から仕上げまで一切妥協しません。
+        </p>
+        <p>
+          旬の素材、世界各地のスピリッツ、そして日本の繊細な感性を融合させたオリジナルカクテルは、
+          この店でしか味わえない唯一無二の体験です。
+        </p>
+      </div>
+      <a href="about.html" class="btn-primary" style="margin-top:2rem;">Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-title section-title--center fade-in">
+      <p class="section-en">Gallery</p>
+      <p class="section-jp">ギャラリー</p>
+    </div>
+    <div class="divider divider--center" style="margin-bottom:40px;"></div>
+    <!-- CMS から動的ロード -->
+    <div class="gallery__grid" id="gallery-grid">
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&q=80" alt="バー内観"></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80" alt="カクテル"></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1508247967583-7d982ea01526?w=1200&q=80" alt="バーカウンター"></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1200&q=80" alt="夜の雰囲気"></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800&q=80" alt="ウイスキー"></div>
+      <div class="gallery__item"><img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?w=800&q=80" alt="カクテルグラス"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTY -->
+<section id="party">
+  <div class="party__inner">
+    <div class="party__image fade-in">
+      <img src="https://images.unsplash.com/photo-1508247967583-7d982ea01526?w=1200&q=80" alt="貸切パーティー">
+    </div>
+    <div class="party__text fade-in">
+      <div class="section-title">
+        <p class="section-en">Private Party</p>
+        <p class="section-jp">貸切・宴会</p>
+      </div>
+      <div class="divider"></div>
+      <p>
+        ご誕生日・記念日・ビジネス会食など、特別な夜のご要望にお応えします。
+        着席最大20名様、立食最大35名様まで対応。
+        お飲み物・料理はご予算に合わせてご提案いたします。
+      </p>
+      <ul class="party__features">
+        <li class="party__feature">着席 最大20名 / 立食 最大35名</li>
+        <li class="party__feature">完全貸切プランあり（要相談）</li>
+        <li class="party__feature">オリジナルウェルカムドリンク対応</li>
+        <li class="party__feature">ケーキ・装花の持ち込み可</li>
+      </ul>
+      <div class="party__btn">
+        <a href="tel:03-1234-5678" class="btn-primary">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="container">
+    <div class="section-title fade-in">
+      <p class="section-en">News</p>
+      <p class="section-jp">お知らせ</p>
+    </div>
+    <!-- CMS から動的ロード -->
+    <div class="news__list" id="news-list">
+      <div class="news__item fade-in">
+        <span class="news__date">2026.02.20</span>
+        <span class="news__cat">メニュー</span>
+        <span class="news__title">春の新メニュー追加のお知らせ</span>
+      </div>
+      <div class="news__item fade-in">
+        <span class="news__date">2026.02.15</span>
+        <span class="news__cat">イベント</span>
+        <span class="news__title">2/28（土）特別ナイト「Jazz &amp; Cocktail Evening」開催</span>
+      </div>
+      <div class="news__item fade-in">
+        <span class="news__date">2026.02.01</span>
+        <span class="news__cat">お知らせ</span>
+        <span class="news__title">Bar Nocturne グランドオープンのお知らせ</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access">
+  <div class="access__inner">
+    <div class="access__map fade-in">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.4!2d139.6988!3d35.6595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDM5JzM0LjIiTiAxMznCsDQxJzU1LjciRQ!5e0!3m2!1sja!2sjp!4v1234567890"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Bar Nocturne アクセスマップ">
+      </iframe>
+    </div>
+    <div class="access__info fade-in">
+      <div class="section-title">
+        <p class="section-en">Access</p>
+        <p class="section-jp">アクセス・営業時間</p>
+      </div>
+      <div class="divider"></div>
+      <table>
+        <tr>
+          <th>Address</th>
+          <td>東京都渋谷区道玄坂2-10-12<br>ノクターンビルB1F</td>
+        </tr>
+        <tr>
+          <th>Hours</th>
+          <td>
+            月〜土 18:00 — 翌2:00<br>
+            日・祝 17:00 — 24:00
+          </td>
+        </tr>
+        <tr>
+          <th>Closed</th>
+          <td>祝日の翌平日</td>
+        </tr>
+        <tr>
+          <th>Access</th>
+          <td>
+            渋谷駅（JR・東急・地下鉄）より徒歩7分<br>
+            道玄坂を上がって左手の路地へ
+          </td>
+        </tr>
+      </table>
+      <a href="tel:03-1234-5678" class="access__tel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        03-1234-5678
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer__inner">
+    <div>
+      <p class="footer__logo">Bar <span>Nocturne</span></p>
+      <p class="footer__desc">
+        東京・渋谷道玄坂の隠れ家ダイニングバー。<br>
+        夜の静寂の中で、こだわりのカクテルと料理をお楽しみください。
+      </p>
+    </div>
+    <nav class="footer__nav">
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="access.html">Access</a>
+      <a href="index.html#party">Private Party</a>
+      <a href="admin/">Admin</a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__sns">
+      <a href="https://instagram.com/bar.nocturne" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://twitter.com/bar_nocturne" target="_blank" rel="noopener">Twitter / X</a>
+    </div>
+    <p class="footer__copy">© 2026 Bar Nocturne. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- スマホ固定CTA -->
+<div class="fixed-cta">
+  <a href="tel:03-1234-5678" class="fixed-cta__tel">📞 電話する</a>
+  <a href="#party" class="fixed-cta__reserve">貸切・予約</a>
+</div>
+
+<script src="js/cms-loader.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

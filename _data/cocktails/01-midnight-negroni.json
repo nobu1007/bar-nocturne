@@ -1,0 +1,10 @@
+{
+  "name": "ミッドナイト ネグローニ",
+  "name_en": "Midnight Negroni",
+  "category": "cocktail",
+  "price": 1800,
+  "description": "深夜の静寂をイメージしたオリジナルネグローニ。スモーキーなジンにビターオレンジの余韻が続く、大人の一杯。",
+  "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80",
+  "featured": true,
+  "order": 1
+}

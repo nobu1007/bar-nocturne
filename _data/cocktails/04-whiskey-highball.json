@@ -1,0 +1,10 @@
+{
+  "name": "山崎 ハイボール",
+  "name_en": "Yamazaki Highball",
+  "category": "whiskey",
+  "price": 2200,
+  "description": "日本を代表するシングルモルト「山崎」を使ったこだわりのハイボール。炭酸は極細で、華やかな香りを閉じ込めた一杯。",
+  "image": "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=800&q=80",
+  "featured": false,
+  "order": 10
+}

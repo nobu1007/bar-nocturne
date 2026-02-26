@@ -1,0 +1,116 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: ja
+
+collections:
+  - name: "settings"
+    label: "店舗情報"
+    files:
+      - label: "基本情報"
+        name: "info"
+        file: "_data/settings.json"
+        fields:
+          - { label: "店名", name: "name", widget: "string" }
+          - { label: "英語店名", name: "name_en", widget: "string" }
+          - { label: "キャッチコピー（日本語）", name: "tagline", widget: "string" }
+          - { label: "サブキャッチ（英語）", name: "tagline_en", widget: "string" }
+          - { label: "コンセプト本文", name: "concept", widget: "text" }
+          - { label: "住所", name: "address", widget: "string" }
+          - { label: "電話番号", name: "tel", widget: "string" }
+          - label: "営業時間"
+            name: "hours"
+            widget: "list"
+            fields:
+              - { label: "曜日", name: "day", widget: "string" }
+              - { label: "時間", name: "time", widget: "string" }
+          - { label: "定休日", name: "closed", widget: "string" }
+          - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+          - { label: "Twitter/X URL", name: "twitter", widget: "string", required: false }
+          - { label: "貸切・宴会の説明", name: "party_text", widget: "text" }
+
+  - name: "cocktails"
+    label: "カクテル・ドリンクメニュー"
+    folder: "_data/cocktails"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "ドリンク名（日本語）", name: "name", widget: "string" }
+      - { label: "ドリンク名（英語）", name: "name_en", widget: "string" }
+      - label: "カテゴリ"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "オリジナルカクテル", value: "cocktail" }
+          - { label: "ウイスキー", value: "whiskey" }
+          - { label: "ワイン", value: "wine" }
+          - { label: "ソフトドリンク", value: "soft" }
+      - { label: "価格（税込）", name: "price", widget: "number" }
+      - { label: "説明", name: "description", widget: "text" }
+      - { label: "写真", name: "image", widget: "image" }
+      - { label: "おすすめ（トップページ表示）", name: "featured", widget: "boolean", default: false }
+      - { label: "表示順", name: "order", widget: "number", default: 99 }
+
+  - name: "food"
+    label: "フードメニュー"
+    folder: "_data/food"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "料理名（日本語）", name: "name", widget: "string" }
+      - { label: "料理名（英語）", name: "name_en", widget: "string" }
+      - label: "カテゴリ"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "前菜・アミューズ", value: "starter" }
+          - { label: "メイン", value: "main" }
+          - { label: "デザート", value: "dessert" }
+          - { label: "チーズ", value: "cheese" }
+      - { label: "価格（税込）", name: "price", widget: "number" }
+      - { label: "説明", name: "description", widget: "text" }
+      - { label: "写真", name: "image", widget: "image" }
+      - { label: "おすすめ（トップページ表示）", name: "featured", widget: "boolean", default: false }
+      - { label: "表示順", name: "order", widget: "number", default: 99 }
+
+  - name: "news"
+    label: "お知らせ"
+    folder: "_data/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "日付", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - label: "カテゴリ"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "お知らせ", value: "info" }
+          - { label: "イベント", value: "event" }
+          - { label: "メニュー", value: "menu" }
+          - { label: "臨時休業", value: "close" }
+      - { label: "本文", name: "body", widget: "markdown" }
+
+  - name: "gallery"
+    label: "ギャラリー"
+    files:
+      - label: "ギャラリー画像"
+        name: "gallery"
+        file: "_data/gallery.json"
+        fields:
+          - label: "画像一覧"
+            name: "images"
+            widget: "list"
+            fields:
+              - { label: "画像", name: "src", widget: "image" }
+              - { label: "説明（alt）", name: "alt", widget: "string" }

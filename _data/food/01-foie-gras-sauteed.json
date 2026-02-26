@@ -1,0 +1,10 @@
+{
+  "name": "フォアグラのソテー バルサミコソース",
+  "name_en": "Foie Gras Sauté, Balsamic Reduction",
+  "category": "starter",
+  "price": 2800,
+  "description": "厳選フォアグラをカリッと香ばしく焼き上げ、芳醇なバルサミコのソースと共に。記念日やお祝いのひとときに相応しい逸品。",
+  "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+  "featured": true,
+  "order": 1
+}

@@ -1,0 +1,17 @@
+{
+  "name": "バー ノクターン",
+  "name_en": "Bar Nocturne",
+  "tagline": "夜の静寂に宿る、大人の食と酒。",
+  "tagline_en": "Where the Night Speaks in Flavor.",
+  "concept": "喧騒を離れた路地の奥、ひっそりと灯りを灯すBar Nocturne。\nこだわりのカクテルと、素材の旨みを凝縮した料理で、あなたの夜を彩ります。\nバーテンダーとの会話、グラスに揺れる琥珀色のひとときを、どうぞゆっくりとお楽しみください。",
+  "address": "東京都渋谷区道玄坂2-10-12 ノクターンビルB1F",
+  "tel": "03-1234-5678",
+  "hours": [
+    { "day": "月〜土", "time": "18:00 — 翌2:00 (L.O. 翌1:30)" },
+    { "day": "日・祝", "time": "17:00 — 24:00 (L.O. 23:30)" }
+  ],
+  "closed": "祝日の翌平日",
+  "instagram": "https://instagram.com/bar.nocturne",
+  "twitter": "https://twitter.com/bar_nocturne",
+  "party_text": "貸切パーティーやビジネスのご会食にもご対応いたします。着席最大20名様、立食最大35名様まで承ります。お飲み物・お料理はご予算に合わせてご提案いたします。まずはお気軽にご相談ください。"
+}

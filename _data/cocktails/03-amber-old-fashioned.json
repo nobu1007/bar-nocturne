@@ -1,0 +1,10 @@
+{
+  "name": "アンバー オールドファッション",
+  "name_en": "Amber Old Fashioned",
+  "category": "cocktail",
+  "price": 2000,
+  "description": "バーボンとアメリカンオークのスモークで仕上げる至高の一杯。バニラとキャラメルの甘みが夜の深みと溶け合う。",
+  "image": "https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800&q=80",
+  "featured": true,
+  "order": 3
+}

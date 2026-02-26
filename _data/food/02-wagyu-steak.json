@@ -1,0 +1,10 @@
+{
+  "name": "和牛サーロイン ステーキ 100g",
+  "name_en": "Wagyu Sirloin Steak 100g",
+  "category": "main",
+  "price": 4800,
+  "description": "A5ランクの和牛サーロインを鉄板でシンプルに。肉の旨みを最大限に引き出すため、塩とわさびのみで仕上げる至高の一皿。",
+  "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&q=80",
+  "featured": true,
+  "order": 2
+}

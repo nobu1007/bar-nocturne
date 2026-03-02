@@ -91,9 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
      6. CMS データ読み込み
      =================================== */
   if (window.CMSLoader) {
+    // 全ページ共通: settings.json を展開
+    CMSLoader.loadSettings();
+
     // トップページ
     if (document.getElementById('hero')) {
-      CMSLoader.loadHeroContent();
       CMSLoader.loadMenuPickup();
       CMSLoader.loadGallery();
       CMSLoader.loadNews();
@@ -101,6 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // メニューページ
     if (document.getElementById('drink-grid') || document.getElementById('food-grid')) {
       CMSLoader.loadFullMenu();
+    }
+    // Aboutページ（ギャラリーをgallery.jsonから読む）
+    if (document.getElementById('gallery-about')) {
+      CMSLoader.loadGallery();
     }
   }
 

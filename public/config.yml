@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: master
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
@@ -11,15 +11,15 @@ collections:
   - name: "settings"
     label: "店舗情報"
     files:
-      - label: "基本情報"
+      - label: "基本情報・全設定"
         name: "info"
         file: "_data/settings.json"
         fields:
-          - { label: "店名", name: "name", widget: "string" }
-          - { label: "英語店名", name: "name_en", widget: "string" }
+          # --- 店舗基本情報 ---
+          - { label: "店名（日本語）", name: "name", widget: "string" }
+          - { label: "店名（英語）", name: "name_en", widget: "string" }
           - { label: "キャッチコピー（日本語）", name: "tagline", widget: "string" }
-          - { label: "サブキャッチ（英語）", name: "tagline_en", widget: "string" }
-          - { label: "コンセプト本文", name: "concept", widget: "text" }
+          - { label: "キャッチコピー（英語）", name: "tagline_en", widget: "string" }
           - { label: "住所", name: "address", widget: "string" }
           - { label: "電話番号", name: "tel", widget: "string" }
           - label: "営業時間"
@@ -31,7 +31,89 @@ collections:
           - { label: "定休日", name: "closed", widget: "string" }
           - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
           - { label: "Twitter/X URL", name: "twitter", widget: "string", required: false }
-          - { label: "貸切・宴会の説明", name: "party_text", widget: "text" }
+
+          # --- 画像 ---
+          - { label: "Hero背景画像", name: "hero_image", widget: "image" }
+          - { label: "コンセプト画像", name: "concept_image", widget: "image" }
+          - { label: "貸切セクション画像", name: "party_image", widget: "image" }
+
+          # --- Google Maps ---
+          - { label: "Google Maps 埋め込みURL（iframeのsrc属性の値）", name: "maps_embed_url", widget: "string" }
+
+          # --- コンセプト本文 ---
+          - label: "コンセプト本文（段落ごとに入力）"
+            name: "concept_body"
+            widget: "list"
+            field: { label: "段落", name: "item", widget: "text" }
+
+          # --- バーテンダー情報 ---
+          - { label: "バーテンダー役職", name: "bartender_role", widget: "string" }
+          - { label: "バーテンダー名（日本語）", name: "bartender_name", widget: "string" }
+          - { label: "バーテンダー名（英語）", name: "bartender_name_en", widget: "string" }
+          - { label: "バーテンダー写真", name: "bartender_image", widget: "image" }
+          - { label: "バーテンダー紹介（短）※トップページ用", name: "bartender_bio_short", widget: "text" }
+          - label: "バーテンダー経歴（段落ごとに入力）※Aboutページ用"
+            name: "bartender_bio"
+            widget: "list"
+            field: { label: "段落", name: "item", widget: "text" }
+
+          # --- こだわり・哲学 ---
+          - label: "こだわり・哲学（4項目）"
+            name: "philosophy"
+            widget: "list"
+            fields:
+              - { label: "番号（例: 01）", name: "num", widget: "string" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "本文", name: "text", widget: "text" }
+
+          # --- 貸切・宴会 ---
+          - { label: "貸切・宴会 説明文", name: "party_text", widget: "text" }
+          - label: "貸切 特徴リスト"
+            name: "party_features"
+            widget: "list"
+            field: { label: "特徴", name: "item", widget: "string" }
+
+          # --- アクセス情報 ---
+          - label: "交通アクセス情報"
+            name: "access_directions"
+            widget: "list"
+            fields:
+              - { label: "最寄り駅・交通手段", name: "station", widget: "string" }
+              - { label: "アクセス説明", name: "description", widget: "text" }
+          - { label: "アクセス補足メモ", name: "access_note", widget: "text", required: false }
+
+          # --- フッター ---
+          - { label: "フッター説明文", name: "footer_desc", widget: "text" }
+
+          # --- SEO・メタ情報 ---
+          - label: "SEO・メタ情報"
+            name: "meta"
+            widget: "object"
+            fields:
+              - label: "トップページ"
+                name: "index"
+                widget: "object"
+                fields:
+                  - { label: "タイトル", name: "title", widget: "string" }
+                  - { label: "description", name: "description", widget: "text" }
+              - label: "メニューページ"
+                name: "menu"
+                widget: "object"
+                fields:
+                  - { label: "タイトル", name: "title", widget: "string" }
+                  - { label: "description", name: "description", widget: "text" }
+              - label: "Aboutページ"
+                name: "about"
+                widget: "object"
+                fields:
+                  - { label: "タイトル", name: "title", widget: "string" }
+                  - { label: "description", name: "description", widget: "text" }
+              - label: "Accessページ"
+                name: "access"
+                widget: "object"
+                fields:
+                  - { label: "タイトル", name: "title", widget: "string" }
+                  - { label: "description", name: "description", widget: "text" }
 
   - name: "cocktails"
     label: "カクテル・ドリンクメニュー"

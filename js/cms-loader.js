@@ -1,10 +1,11 @@
 /**
- * cms-loader.js — Bar Nocturne
- * Decap CMS (_data/) のJSONを fetch して DOM に描画するユーティリティ
+ * cms-loader.js — Bar Nocturne v2
+ * Decap CMS (_data/) の JSON を fetch して DOM に描画するユーティリティ。
+ * settings.json の全フィールドを data-cms 属性経由で各ページに展開する。
  */
 
 const CMS = {
-  /** JSONファイルを fetch して返す（失敗時は null） */
+  /** JSON ファイルを fetch して返す（失敗時は null） */
   async load(path) {
     try {
       const res = await fetch(path);
@@ -16,11 +17,31 @@ const CMS = {
     }
   },
 
-  /** ディレクトリ内の JSON 一覧を取得（manifest.json が必要）
-   *  Netlify では公開パスを直接指定するため、manifest配列で管理 */
+  /** ファイルパス配列を並列 fetch して返す */
   async loadAll(files) {
     const results = await Promise.all(files.map(f => this.load(f)));
     return results.filter(Boolean);
+  },
+
+  /** data-cms 属性を持つ全要素のテキストをセット */
+  setText(attr, value) {
+    document.querySelectorAll(`[data-cms="${attr}"]`).forEach(el => {
+      el.textContent = value || '';
+    });
+  },
+
+  /** data-cms-src 属性を持つ img / iframe の src をセット */
+  setSrc(attr, value) {
+    document.querySelectorAll(`[data-cms-src="${attr}"]`).forEach(el => {
+      if (value) el.src = value;
+    });
+  },
+
+  /** data-cms-href 属性を持つ a 要素の href をセット */
+  setHref(attr, value, prefix = '') {
+    document.querySelectorAll(`[data-cms-href="${attr}"]`).forEach(el => {
+      if (value) el.href = prefix + value;
+    });
   },
 
   /** 価格フォーマット */
@@ -62,38 +83,132 @@ const CMS = {
 };
 
 /* ===================================
-   HERO: settings.json からキャッチ・サブを読む
+   動的ファイル検出（index.json 経由）
+   Netlify ビルド時に generate-index.js が生成した
+   index.json を読んでファイル名一覧を取得する。
    =================================== */
-async function loadHeroContent() {
-  const settings = await CMS.load('/_data/settings.json');
-  if (!settings) return;
-
-  const taglineEl = document.querySelector('[data-cms="hero-tagline"]');
-  const taglineEnEl = document.querySelector('[data-cms="hero-tagline-en"]');
-  const titleEnEl = document.querySelector('[data-cms="hero-title-en"]');
-  const nameEnEl = document.querySelector('[data-cms="hero-name-en"]');
-
-  if (taglineEl) taglineEl.textContent = settings.tagline || '';
-  if (taglineEnEl) taglineEnEl.textContent = settings.tagline_en || '';
-  if (titleEnEl) titleEnEl.textContent = settings.name || '';
-  if (nameEnEl) nameEnEl.textContent = settings.name_en || '';
+async function loadCollectionFiles(dir) {
+  const index = await CMS.load(`/_data/${dir}/index.json`);
+  if (!index || !Array.isArray(index.files)) return [];
+  return index.files.map(f => `/_data/${dir}/${f}`);
 }
 
 /* ===================================
-   MENU PICKUP: featured=true のカクテル・フードをトップに表示
+   SETTINGS: 全ページ共通のテキスト・画像展開
+   settings.json の全フィールドを data-cms 属性要素に適用する。
    =================================== */
-const COCKTAIL_FILES = [
-  '/_data/cocktails/01-midnight-negroni.json',
-  '/_data/cocktails/02-nocturne-sour.json',
-  '/_data/cocktails/03-amber-old-fashioned.json',
-  '/_data/cocktails/04-whiskey-highball.json',
-];
-const FOOD_FILES = [
-  '/_data/food/01-foie-gras-sauteed.json',
-  '/_data/food/02-wagyu-steak.json',
-  '/_data/food/03-cheese-selection.json',
-];
+async function loadSettings() {
+  const s = await CMS.load('/_data/settings.json');
+  if (!s) return;
 
+  // --- 基本テキスト ---
+  CMS.setText('settings.tagline',     s.tagline);
+  CMS.setText('settings.tagline_en',  s.tagline_en);
+  CMS.setText('settings.name',        s.name);
+  CMS.setText('settings.name_en',     s.name_en);
+  CMS.setText('settings.address',     s.address);
+  CMS.setText('settings.tel',         s.tel);
+  CMS.setText('settings.closed',      s.closed);
+  CMS.setText('settings.footer_desc', s.footer_desc);
+  CMS.setText('settings.access_note', s.access_note);
+
+  // --- 電話番号リンク（tel:プレフィックス付き）---
+  CMS.setHref('settings.tel', s.tel, 'tel:');
+
+  // --- SNS リンク ---
+  CMS.setHref('settings.instagram', s.instagram);
+  CMS.setHref('settings.twitter',   s.twitter);
+
+  // --- 画像 src ---
+  CMS.setSrc('settings.hero_image',      s.hero_image);
+  CMS.setSrc('settings.concept_image',   s.concept_image);
+  CMS.setSrc('settings.party_image',     s.party_image);
+  CMS.setSrc('settings.bartender_image', s.bartender_image);
+
+  // --- Google Maps iframe src ---
+  CMS.setSrc('settings.maps_embed_url', s.maps_embed_url);
+
+  // --- バーテンダー情報 ---
+  CMS.setText('settings.bartender_role',     s.bartender_role);
+  CMS.setText('settings.bartender_name',     s.bartender_name);
+  CMS.setText('settings.bartender_name_en',  s.bartender_name_en);
+  CMS.setText('settings.bartender_bio_short', s.bartender_bio_short);
+
+  // バーテンダー経歴（複数段落）
+  const bioContainer = document.querySelector('[data-cms-list="settings.bartender_bio"]');
+  if (bioContainer && Array.isArray(s.bartender_bio)) {
+    bioContainer.innerHTML = s.bartender_bio
+      .map(para => `<p>${para}</p>`).join('');
+  }
+
+  // --- コンセプト本文（複数段落）---
+  const conceptContainer = document.querySelector('[data-cms-list="settings.concept_body"]');
+  if (conceptContainer && Array.isArray(s.concept_body)) {
+    conceptContainer.innerHTML = s.concept_body
+      .map(para => `<p>${para}</p>`).join('');
+  }
+
+  // --- Philosophy（JS で生成）---
+  const philoContainer = document.querySelector('[data-cms-list="settings.philosophy"]');
+  if (philoContainer && Array.isArray(s.philosophy)) {
+    philoContainer.innerHTML = s.philosophy.map(item => `
+      <div class="philosophy__item fade-in">
+        <p class="philosophy__num">${item.num}</p>
+        <div>
+          <h3 class="philosophy__title">${item.title}</h3>
+          <p class="philosophy__text">${item.text}</p>
+        </div>
+      </div>
+    `).join('');
+    initFadeIn(philoContainer.querySelectorAll('.fade-in'));
+  }
+
+  // --- 営業時間（テーブル行）---
+  const hoursContainer = document.querySelector('[data-cms-list="settings.hours"]');
+  if (hoursContainer && Array.isArray(s.hours)) {
+    hoursContainer.innerHTML = s.hours.map(h => `
+      <tr>
+        <td>${h.day}</td>
+        <td>${h.time}</td>
+      </tr>
+    `).join('');
+  }
+
+  // --- 貸切テキスト ---
+  CMS.setText('settings.party_text', s.party_text);
+
+  // --- 貸切 特徴リスト ---
+  const featuresContainer = document.querySelector('[data-cms-list="settings.party_features"]');
+  if (featuresContainer && Array.isArray(s.party_features)) {
+    featuresContainer.innerHTML = s.party_features
+      .map(f => `<li class="party__feature">${f}</li>`).join('');
+  }
+
+  // --- アクセス方法 ---
+  const accessContainer = document.querySelector('[data-cms-list="settings.access_directions"]');
+  if (accessContainer && Array.isArray(s.access_directions)) {
+    accessContainer.innerHTML = s.access_directions.map(d => `
+      <div class="access__direction-item">
+        <p class="access__direction-station">${d.station}</p>
+        <p class="access__direction-desc">${d.description}</p>
+      </div>
+    `).join('');
+  }
+
+  // --- meta title / description（ページ別）---
+  const page = document.body.dataset.page;
+  if (page && s.meta && s.meta[page]) {
+    if (s.meta[page].title)       document.title = s.meta[page].title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && s.meta[page].description) {
+      metaDesc.content = s.meta[page].description;
+    }
+  }
+}
+
+/* ===================================
+   メニューカード生成
+   =================================== */
 function createMenuCard(item) {
   const div = document.createElement('div');
   div.className = 'menu-card fade-in';
@@ -113,27 +228,31 @@ function createMenuCard(item) {
   return div;
 }
 
+/* ===================================
+   MENU PICKUP: featured=true のカクテル・フードをトップに表示
+   =================================== */
 async function loadMenuPickup() {
   const container = document.getElementById('menu-pickup-grid');
   if (!container) return;
 
+  const [cocktailFiles, foodFiles] = await Promise.all([
+    loadCollectionFiles('cocktails'),
+    loadCollectionFiles('food'),
+  ]);
+
   const [cocktails, foods] = await Promise.all([
-    CMS.loadAll(COCKTAIL_FILES),
-    CMS.loadAll(FOOD_FILES),
+    CMS.loadAll(cocktailFiles),
+    CMS.loadAll(foodFiles),
   ]);
 
   const featured = [
-    ...cocktails.filter(c => c.featured).sort((a,b) => a.order - b.order),
-    ...foods.filter(f => f.featured).sort((a,b) => a.order - b.order),
+    ...cocktails.filter(c => c.featured).sort((a, b) => a.order - b.order),
+    ...foods.filter(f => f.featured).sort((a, b) => a.order - b.order),
   ].slice(0, 5);
 
   if (featured.length === 0) return;
   container.innerHTML = '';
-  featured.forEach(item => {
-    container.appendChild(createMenuCard(item));
-  });
-
-  // フェードイン再適用
+  featured.forEach(item => container.appendChild(createMenuCard(item)));
   initFadeIn(container.querySelectorAll('.fade-in'));
 }
 
@@ -159,20 +278,14 @@ async function loadGallery() {
 /* ===================================
    NEWS
    =================================== */
-const NEWS_FILES = [
-  '/_data/news/2026-02-20-menu.json',
-  '/_data/news/2026-02-15-event.json',
-  '/_data/news/2026-02-01-open.json',
-];
-
 async function loadNews() {
   const container = document.getElementById('news-list');
   if (!container) return;
 
-  const items = await CMS.loadAll(NEWS_FILES);
+  const newsFiles = await loadCollectionFiles('news');
+  const items = await CMS.loadAll(newsFiles);
   if (items.length === 0) return;
 
-  // 日付降順
   items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
   container.innerHTML = '';
@@ -195,23 +308,28 @@ async function loadNews() {
    =================================== */
 async function loadFullMenu() {
   const drinkGrid = document.getElementById('drink-grid');
-  const foodGrid = document.getElementById('food-grid');
+  const foodGrid  = document.getElementById('food-grid');
   if (!drinkGrid && !foodGrid) return;
 
+  const [cocktailFiles, foodFiles] = await Promise.all([
+    loadCollectionFiles('cocktails'),
+    loadCollectionFiles('food'),
+  ]);
+
   const [cocktails, foods] = await Promise.all([
-    CMS.loadAll(COCKTAIL_FILES),
-    CMS.loadAll(FOOD_FILES),
+    CMS.loadAll(cocktailFiles),
+    CMS.loadAll(foodFiles),
   ]);
 
   if (drinkGrid) {
-    const sorted = cocktails.sort((a,b) => a.order - b.order);
+    const sorted = cocktails.sort((a, b) => a.order - b.order);
     drinkGrid.innerHTML = '';
     sorted.forEach(item => drinkGrid.appendChild(createMenuCard(item)));
     initFadeIn(drinkGrid.querySelectorAll('.fade-in'));
   }
 
   if (foodGrid) {
-    const sorted = foods.sort((a,b) => a.order - b.order);
+    const sorted = foods.sort((a, b) => a.order - b.order);
     foodGrid.innerHTML = '';
     sorted.forEach(item => foodGrid.appendChild(createMenuCard(item)));
     initFadeIn(foodGrid.querySelectorAll('.fade-in'));
@@ -237,7 +355,7 @@ function initFadeIn(elements) {
    エクスポート
    =================================== */
 window.CMSLoader = {
-  loadHeroContent,
+  loadSettings,
   loadMenuPickup,
   loadGallery,
   loadNews,

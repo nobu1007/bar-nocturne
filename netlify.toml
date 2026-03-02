@@ -1,0 +1,8 @@
+[build]
+  command = "node scripts/generate-index.js"
+  publish = "."
+
+[[headers]]
+  for = "/_data/*"
+  [headers.values]
+    Cache-Control = "no-cache"

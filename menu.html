@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="menu">
 
 <!-- ヘッダー -->
 <header>
@@ -20,7 +20,7 @@
       <li><a href="menu.html" style="color:var(--color-primary);">Menu</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="access.html">Access</a></li>
-      <li><a href="tel:03-1234-5678" class="btn-primary">Reservation</a></li>
+      <li><a href="tel:03-1234-5678" class="btn-primary" data-cms-href="settings.tel">Reservation</a></li>
     </ul>
   </nav>
   <button class="burger" aria-label="メニューを開く">
@@ -53,78 +53,18 @@
         すべての価格は税込表示です。サービス料は別途いただきません。
       </p>
 
-      <!-- カクテル -->
+      <!-- カクテル・ドリンク（CMS から動的ロード）-->
       <div style="margin-bottom:50px;">
         <div class="section-title fade-in" style="margin-bottom:24px;">
-          <p style="font-family:var(--font-serif-en);font-size:1.4rem;color:var(--color-primary);letter-spacing:0.1em;">Original Cocktails</p>
-          <p class="section-jp">オリジナルカクテル</p>
+          <p style="font-family:var(--font-serif-en);font-size:1.4rem;color:var(--color-primary);letter-spacing:0.1em;">Drinks</p>
+          <p class="section-jp">ドリンクメニュー</p>
         </div>
         <div class="menu-grid" id="drink-grid">
-          <!-- CMS からロード / フォールバック -->
-          <div class="menu-card fade-in">
-            <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80" alt="Midnight Negroni"></div>
-            <div class="menu-card__body">
-              <p class="menu-card__category">Original Cocktail</p>
-              <h3 class="menu-card__name">Midnight Negroni</h3>
-              <p class="menu-card__name-jp">ミッドナイト ネグローニ</p>
-              <p class="menu-card__desc">深夜の静寂をイメージしたオリジナルネグローニ。スモーキーなジンにビターオレンジの余韻が続く、大人の一杯。</p>
-              <p class="menu-card__price">¥1,800</p>
-            </div>
-          </div>
-          <div class="menu-card fade-in">
-            <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?w=800&q=80" alt="Nocturne Sour"></div>
-            <div class="menu-card__body">
-              <p class="menu-card__category">Original Cocktail</p>
-              <h3 class="menu-card__name">Nocturne Sour</h3>
-              <p class="menu-card__name-jp">ノクターン サワー</p>
-              <p class="menu-card__desc">ジャパニーズウイスキーをベースに、ゆずと蜂蜜で爽やかに仕上げたシグネチャーカクテル。</p>
-              <p class="menu-card__price">¥1,600</p>
-            </div>
-          </div>
-          <div class="menu-card fade-in">
-            <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800&q=80" alt="Amber Old Fashioned"></div>
-            <div class="menu-card__body">
-              <p class="menu-card__category">Original Cocktail</p>
-              <h3 class="menu-card__name">Amber Old Fashioned</h3>
-              <p class="menu-card__name-jp">アンバー オールドファッション</p>
-              <p class="menu-card__desc">バーボンとアメリカンオークのスモークで仕上げる至高の一杯。バニラとキャラメルの甘みが夜の深みと溶け合う。</p>
-              <p class="menu-card__price">¥2,000</p>
-            </div>
-          </div>
+          <p style="color:var(--color-text-sub);text-align:center;width:100%;">Loading...</p>
         </div>
       </div>
 
-      <!-- ウイスキー -->
-      <div style="margin-bottom:50px;">
-        <div class="section-title fade-in" style="margin-bottom:24px;">
-          <p style="font-family:var(--font-serif-en);font-size:1.4rem;color:var(--color-primary);letter-spacing:0.1em;">Whiskey</p>
-          <p class="section-jp">ウイスキー</p>
-        </div>
-        <div class="menu-grid">
-          <div class="menu-card fade-in">
-            <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=800&q=80" alt="山崎 ハイボール"></div>
-            <div class="menu-card__body">
-              <p class="menu-card__category">Whiskey</p>
-              <h3 class="menu-card__name">Yamazaki Highball</h3>
-              <p class="menu-card__name-jp">山崎 ハイボール</p>
-              <p class="menu-card__desc">日本を代表するシングルモルト「山崎」を使ったこだわりのハイボール。炭酸は極細で、華やかな香りを閉じ込める。</p>
-              <p class="menu-card__price">¥2,200</p>
-            </div>
-          </div>
-          <div class="menu-card fade-in">
-            <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800&q=80" alt="Macallan 12年"></div>
-            <div class="menu-card__body">
-              <p class="menu-card__category">Whiskey</p>
-              <h3 class="menu-card__name">Macallan 12yr</h3>
-              <p class="menu-card__name-jp">マッカラン 12年</p>
-              <p class="menu-card__desc">シェリー樽熟成特有のドライフルーツ・チョコレートの香り。スコッチウイスキーの王道。</p>
-              <p class="menu-card__price">¥1,800</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ソフトドリンク -->
+      <!-- ソフトドリンク（固定テーブル）-->
       <div style="background:var(--color-bg-card);border:1px solid var(--color-border);padding:32px;max-width:600px;">
         <p style="font-family:var(--font-sans-en);font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--color-primary);margin-bottom:16px;">Soft Drinks</p>
         <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
@@ -153,38 +93,9 @@
       <p style="text-align:center;color:var(--color-text-sub);font-size:0.8rem;letter-spacing:0.2em;margin-bottom:36px;">
         素材にこだわった創作料理をご用意しております。すべての価格は税込表示です。
       </p>
+      <!-- CMS から動的ロード -->
       <div class="menu-grid" id="food-grid">
-        <!-- CMS からロード / フォールバック -->
-        <div class="menu-card fade-in">
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="フォアグラ"></div>
-          <div class="menu-card__body">
-            <p class="menu-card__category">Starter</p>
-            <h3 class="menu-card__name">Foie Gras Sauté</h3>
-            <p class="menu-card__name-jp">フォアグラのソテー バルサミコソース</p>
-            <p class="menu-card__desc">厳選フォアグラをカリッと香ばしく焼き上げ、芳醇なバルサミコのソースと共に。記念日に相応しい逸品。</p>
-            <p class="menu-card__price">¥2,800</p>
-          </div>
-        </div>
-        <div class="menu-card fade-in">
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&q=80" alt="和牛ステーキ"></div>
-          <div class="menu-card__body">
-            <p class="menu-card__category">Main</p>
-            <h3 class="menu-card__name">Wagyu Sirloin 100g</h3>
-            <p class="menu-card__name-jp">和牛サーロイン ステーキ</p>
-            <p class="menu-card__desc">A5ランクの和牛サーロインを鉄板でシンプルに。塩とわさびのみで仕上げる至高の一皿。</p>
-            <p class="menu-card__price">¥4,800</p>
-          </div>
-        </div>
-        <div class="menu-card fade-in">
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=800&q=80" alt="チーズ"></div>
-          <div class="menu-card__body">
-            <p class="menu-card__category">Cheese</p>
-            <h3 class="menu-card__name">Cheese Selection</h3>
-            <p class="menu-card__name-jp">本日のチーズセレクション</p>
-            <p class="menu-card__desc">フランス・イタリアより厳選した3〜4種のチーズ。蜂蜜・ナッツ・クラッカーと共に。</p>
-            <p class="menu-card__price">¥1,800</p>
-          </div>
-        </div>
+        <p style="color:var(--color-text-sub);text-align:center;width:100%;">Loading...</p>
       </div>
     </div>
 
@@ -196,7 +107,7 @@
   <div class="footer__inner">
     <div>
       <p class="footer__logo">Bar <span>Nocturne</span></p>
-      <p class="footer__desc">東京・渋谷道玄坂の隠れ家ダイニングバー。</p>
+      <p class="footer__desc" data-cms="settings.footer_desc">東京・渋谷道玄坂の隠れ家ダイニングバー。</p>
     </div>
     <nav class="footer__nav">
       <a href="index.html">Top</a>
@@ -207,7 +118,7 @@
   </div>
   <div class="footer__bottom">
     <div class="footer__sns">
-      <a href="https://instagram.com/bar.nocturne" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://instagram.com/bar.nocturne" target="_blank" rel="noopener" data-cms-href="settings.instagram">Instagram</a>
     </div>
     <p class="footer__copy">© 2026 Bar Nocturne. All rights reserved.</p>
   </div>
@@ -215,7 +126,7 @@
 
 <!-- スマホ固定CTA -->
 <div class="fixed-cta">
-  <a href="tel:03-1234-5678" class="fixed-cta__tel">📞 電話する</a>
+  <a href="tel:03-1234-5678" class="fixed-cta__tel" data-cms-href="settings.tel">📞 電話する</a>
   <a href="index.html#party" class="fixed-cta__reserve">貸切・予約</a>
 </div>
 
